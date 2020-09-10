@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>IOT Events</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">>
+    </head>
+    <body>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Event Form</div>
+    <form class="ui form" id="eventForm" action="index.html" method="POST">
+        <div class="field">
+            <label>Event name</label>
+            <input type="text" name="name" placeholder="Event name" id="name">
+        </div>
+        <div class="field">
+            <label>Registration link</label>
+            <input type="text" name="link" placeholder="Registration link" id="link">
+        </div>
+        <div class="field">
+            <label>Image</label>
+            <input type="file" name="image" placeholder="Image" id="image">
+        </div>
+        <div class="field">
+            <div class="item">
+                <label for="date">Date<span>*</span></label>
+                <input id="date" type="date" name="date" required/>
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+        </div>
+        <div class="field">
+            <div class="flax">
+                <div class="item">
+                  <p>Time</p>
+                  <select name="time" id="time">
+                    <option selected value="" disabled selected></option>
+                    <option value="8A" >8 AM</option>
+                    <option value="9A">9 AM</option>
+                    <option value="10A">10 AM</option>
+                    <option value="11A">11 Am</option>
+                    <option value="12P">12 Pm</option>
+                    <option value="1P">1 Pm</option>
+                    <option value="2P">2 Pm</option>
+                    <option value="3P">3 Pm</option>
+                    <option value="4P">4 Pm</option>
+                    <option value="5P">5 Pm</option>
+                    <option value="6P">6 Pm</option>
+                    <option value="7P">7 Pm</option>
+                    <option value="8P">8 Pm</option>
+                  </select>
+                </div>
+              </div>
+        </div>
+      
+        <div class="field">
+            <label>Event description</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <input class="ui blue basic big button" type="submit">
+    </form>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase.js"></script>
+
+<script src="main.js"></script>
+</body>
+</html>
