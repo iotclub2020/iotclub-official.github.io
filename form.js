@@ -1,75 +1,48 @@
-// Your web app's Firebase configuration
-  var firebaseConfig = {
-  apiKey: "AIzaSyAMBlgm_BBWWVEIRmMc1ddSbfza9SdgILI",
-  authDomain: "iotclub-3b2cd.firebaseapp.com",
-  databaseURL: "https://iotclub-3b2cd.firebaseio.com",
-  projectId: "iotclub-3b2cd",
-  storageBucket: "iotclub-3b2cd.appspot.com",
-  messagingSenderId: "1031333943987",
-  appId: "1:1031333943987:web:0b5ea748b9a1a6754deec6",
-  measurementId: "G-ZHE2R9FRH1"
+
+var firebaseConfig = {
+    apiKey: "AIzaSyCnFw8pA6uGPtFd9rY71atIsUCoX8uHtsk",
+    authDomain: "iot-events-3d614.firebaseapp.com",
+    databaseURL: "https://iot-events-3d614.firebaseio.com",
+    projectId: "iot-events-3d614",
+    storageBucket: "iot-events-3d614.appspot.com",
+    messagingSenderId: "297259063119",
+    appId: "1:297259063119:web:5dcd762088e2dd528c173a",
+    measurementId: "G-RX44V05JWR"
   };
-  // Initialize Firebase
+
+
   firebase.initializeApp(firebaseConfig);
-  
-	const auth = firebase.auth();
-	
-	
-	function signUp(){
-		
-		var email = document.getElementById("email");
-		var password = document.getElementById("password");
-		
-		const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-		promise.catch(e => alert(e.message));
-		
-		alert("Signed Up");
-	}
-	
-	
-	
-	function signIn(){
-		
-		var email = document.getElementById("email");
-		var password = document.getElementById("password");
-		
-		const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-		promise.catch(e => alert(e.message));
-		window.location = "LEADERBOARD.html"
-		
-		
-		
-	}
-	
-	
-	function signOut(){
-		
-		auth.signOut();
-		alert("Signed Out");
-		
-	}
-	
-	
-	
-	auth.onAuthStateChanged(function(user){
-		
-		if(user){
-			
-			var email = user.email;
-			alert("Active User " + email);
-			
-			//Take user to a different or home page
+  var messageRef = firebase.database().ref('message');
+document.getElementById('eventForm').addEventListener('submit',submitForm);
 
-			//is signed in
-			
-		}else{
-			
-			alert("No Active User");
-			//no user is signed in
-		}
-		
-		
-		
-	});
-	
+function submitForm(e)
+{
+    e.preventDefault();
+    var name=getInputVal('name');
+    var image=getInputVal('image');
+    var link=getInputVal('link');
+    var date=getInputVal('date');
+    var time=getInputVal('time');
+    var desc=getInputVal('description');
+    
+    saveMessage(name,image,date,time,description,link);
 
+}
+
+function getInputVal(id)
+{
+    return document.getElementById(id).value;
+}
+function saveMessage(name,image,date,time,description,link)
+{
+    var newMessageRef = messageRef.push();
+    newMessageRef.set({
+        name: name,
+        image: image,
+        date: date,
+        time: time,
+        link: link,
+        description:description
+
+    });
+}
