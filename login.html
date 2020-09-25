@@ -148,44 +148,60 @@
         <!-- FA Questions Text -->
       
  
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
-	<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-	
-	<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
-	<script src="form.js"> </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-		a {
-		color: white;
-		}
-    </style>
+  <title>Firebase Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+   <script type="text/javascript">
+         <!--
+            function Redirect() {
+               window.location="leaderboard.html";
+            }
+         //-->
+      </script>
+      
 </head>
 <body>
 <center>
-    <div class="wrapper">
-        <h2><u>Login</u></h2>
-		<div id="formContainer">
-            <div id="header"> </div>
-            <input type="email" placeholder="email" class="form-control" id="email"/><br><br>
-			<input type="password" placeholder="password" class="form-control" id="password"/><br><br>
-			<div class="form-group">
-            <button onclick="signIn()"class="btn btn-primary" id="signIn"><a href="LEADERBOARD.html">Login</a></button><br><br>
-				
-            </div>
-			<div class="form-group">
-               <button onclick="signOut()"class="btn btn-primary" id="signOut">SignOut</button><br><br>
-				
-            </div>
-    </div> 
-</center>	
+ 
+<div id="login_div" class="main-div">
+    <br>
+	
+    <input type="email" placeholder="Email..." id="email_field" />
+	<br>
+	<br>
+    <input type="password" placeholder="Password..." id="password_field" />
+	<br>
+	<br>
+    <button class="btn btn-primary" onclick="login()">Login to Account</button>
+  </div>
+
+  
+	
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAMBlgm_BBWWVEIRmMc1ddSbfza9SdgILI",
+  authDomain: "iotclub-3b2cd.firebaseapp.com",
+  databaseURL: "https://iotclub-3b2cd.firebaseio.com",
+  projectId: "iotclub-3b2cd",
+  storageBucket: "iotclub-3b2cd.appspot.com",
+  messagingSenderId: "1031333943987",
+  appId: "1:1031333943987:web:0b5ea748b9a1a6754deec6",
+  measurementId: "G-ZHE2R9FRH1"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="index.js"></script>
+
 </body>
 </html>
+
 
 
   
