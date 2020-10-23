@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TCE IoT Website</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/animate.css" rel="stylesheet" type="text/css"/>
+    <link href="vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+    <link href="vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Theme Styles -->
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/global/global.css" rel="stylesheet" type="text/css"/>
+	
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+	<link rel="stylesheet" href="stylesleaderboard.css">
+
+
+	<script type="text/javascript">
+
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyAMBlgm_BBWWVEIRmMc1ddSbfza9SdgILI",
+	    authDomain: "iotclub-3b2cd.firebaseapp.com",
+	    databaseURL: "https://iotclub-3b2cd.firebaseio.com",
+	    projectId: "iotclub-3b2cd",
+	    storageBucket: "iotclub-3b2cd.appspot.com",
+	    messagingSenderId: "1031333943987",
+	    appId: "1:1031333943987:web:43f55129846f1a754deec6",
+	    measurementId: "G-82LG5CXE52"
+	  };
+
+
+	  firebase.initializeApp(firebaseConfig);
+
+	  var points = {};
+	  var sorted_points = [];
+	  var userRef = firebase.database().ref('user-data/');
+
+	  function setvalues(callback){
+	 
+		  userRef.once('value',function(snapshot){
+
+		  	var userdata = snapshot.val();
+
+		  	for(user in userdata){
+		  		points[user] = userdata[user]["points"];
+		  	}
+
+		  	for (var user in points) {
+			    sorted_points.push([user, points[user]]);
+			}
+
+			sorted_points.sort(function(a, b) {
+			    return b[1] - a[1];
+			});
+
+		  	callback();
+
+		  });
+
+		};
+
+	  setvalues(function(data){
+
+	  	document.getElementById('name1').innerHTML = "1. "+sorted_points[0][0];
+	  	document.getElementById('name2').innerHTML = "2. "+sorted_points[1][0];
+	  	document.getElementById('name3').innerHTML = "3. "+sorted_points[2][0];
+	  	document.getElementById('name4').innerHTML = "4. "+sorted_points[3][0];
+	  	document.getElementById('name5').innerHTML = "5. "+sorted_points[4][0];
+
+	  	document.getElementById('points1').innerHTML = sorted_points[0][1].toString()+" points";
+	  	document.getElementById('points2').innerHTML = sorted_points[1][1].toString()+" points";
+	  	document.getElementById('points3').innerHTML = sorted_points[2][1].toString()+" points";
+	  	document.getElementById('points4').innerHTML = sorted_points[3][1].toString()+" points";
+	  	document.getElementById('points5').innerHTML = sorted_points[4][1].toString()+" points";
+
+	  	document.getElementById('bar1').style.width = sorted_points[0][1].toString()+"%";
+	  	document.getElementById('bar2').style.width = sorted_points[1][1].toString()+"%";
+	  	document.getElementById('bar3').style.width = sorted_points[2][1].toString()+"%";
+	  	document.getElementById('bar4').style.width = sorted_points[3][1].toString()+"%";
+	  	document.getElementById('bar5').style.width = sorted_points[4][1].toString()+"%";
+
+      });
+
+	</script>
+	
+</head>
+
+<body style="background-image :url('bg.gif')">
+
+    <header class="navbar-fixed-top s-header js__header-sticky js__header-overlay">
+        <!-- Navbar -->
+        <div class="s-header__navbar">
+            <div class="s-header__container">
+                <div class="s-header__navbar-row">
+                    <div class="s-header__navbar-row-col">
+                        <!-- Logo -->
+                        <div class="s-header__logo">
+                            <a href="index.html" class="s-header__logo-link">
+                                <img class="s-header__logo-img s-header__logo-img-default" src="img/logo.png" alt="Megakit Logo">
+                                <img class="s-header__logo-img s-header__logo-img-shrink" src="img/logo-dark.png" alt="Megakit Logo">
+                            </a>
+                        </div>
+                        <!-- End Logo -->
+                    </div>
+                    <div class="s-header__navbar-row-col">
+                        <!-- Trigger -->
+                        <a href="javascript:void(0);" class="s-header__trigger js__trigger">
+                            <span class="s-header__trigger-icon"></span>
+                            <svg x="0rem" y="0rem" width="3.125rem" height="3.125rem" viewbox="0 0 54 54">
+                                <circle fill="transparent" stroke="#fff" stroke-width="1" cx="27" cy="27" r="25" stroke-dasharray="157 157" stroke-dashoffset="157"></circle>
+                            </svg>
+                        </a>
+                        <!-- End Trigger -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar -->
+
+        <!-- Overlay -->
+        <div class="s-header-bg-overlay js__bg-overlay">
+            <!-- Nav -->
+            <nav class="s-header__nav js__scrollbar">
+                <div class="container-fluid">
+                    <!-- Menu List -->                                
+                    <ul class="list-unstyled s-header__nav-menu">
+                        <li class="s-header__nav-menu-item"><a
+							class="s-header__nav-menu-link s-header__nav-menu-link-divider -is-active"
+							href="leaderboard.html">Leaderboard</a></li>
+					<!--<li class="s-header__nav-menu-item"><a
+								class="s-header__nav-menu-link s-header__nav-menu-link-divider"
+								href="events.html">Events</a></li>-->
+					<li class="s-header__nav-menu-item"><a
+							class="s-header__nav-menu-link s-header__nav-menu-link-divider"
+							href="profile.html">Profile</a></li>
+					<li class="s-header__nav-menu-item"><a
+							class="s-header__nav-menu-link s-header__nav-menu-link-divider"
+							href="index.html">Logout</a></li>
+                    </ul>
+                    <!-- End Menu List -->
+                </div>
+            </nav>
+            <!-- End Nav -->
+            <!-- End Action -->
+        </div>
+        <!-- End Overlay -->
+    </header>
+
+
+	<div class="wrapper">
+		<div class="lboard_section">
+			<div class="lboard_tabs">
+				<div class="tabs">
+					<ul>
+						<li class="active" data-li="overall">Overall Scores</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="lboard_wrap">
+				<div class="lboard_item overall" style="display: block;">
+					
+
+					<div class="lboard_mem">
+						<div class="name_bar">
+							<p id='name1'>1. Loading..</p>
+							<div class="bar_wrap">
+								<div id="bar1" class="inner_bar" style="width: 0%"></div>
+							</div>
+						</div>
+						<div id="points1">
+							0 points
+						</div>
+					</div>
+
+
+					<div class="lboard_mem">
+						<div class="name_bar">
+							<p id='name2'>2. Loading..</p>
+							<div class="bar_wrap">
+								<div id="bar2" class="inner_bar" style="width: 0%"></div>
+							</div>
+						</div>
+						<div id="points2">
+							0 points
+						</div>
+					</div>
+
+					<div class="lboard_mem">
+						<div class="name_bar">
+							<p id="name3">3. Loading..</p>
+							<div class="bar_wrap">
+								<div id="bar3" class="inner_bar" style="width: 0%"></div>
+							</div>
+						</div>
+						<div id="points3">
+							0 points
+						</div>
+					</div>
+					
+
+					<div class="lboard_mem">
+						<div class="name_bar">
+							<p id="name4">4. Loading..</p>
+							<div class="bar_wrap">
+								<div id="bar4" class="inner_bar" style="width: 0%"></div>
+							</div>
+						</div>
+						<div id="points4">
+							0 points
+						</div>
+					</div>
+
+					<div class="lboard_mem">
+						<div class="name_bar">
+							<p id="name5">5. Loading..</p>
+							<div class="bar_wrap">
+								<div id="bar5" class="inner_bar" style="width: 0%"></div>
+							</div>
+						</div>
+						<div id="points5">
+							0 points
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+    <!-- End Body -->
+</html>
+
