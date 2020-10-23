@@ -32,6 +32,11 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+        <!-- Bootstrap Link -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <script src="index.js"></script>
     </head>
     <!-- End Head -->
 
@@ -47,7 +52,7 @@
                         <div class="s-header__navbar-row-col">
                             <!-- Logo -->
                             <div class="s-header__logo">
-                                <a href="https://www.tce.edu/" class="s-header__logo-link">
+                                <a href="index.html" class="s-header__logo-link">
                                     <img class="s-header__logo-img s-header__logo-img-default" src="img/images/tce-logo.png" alt="TCE Logo" width="70px" height="70px">
                                 </a>
                             </div>
@@ -86,7 +91,7 @@
                             <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider -is-active" href="index.html">Home</a></li>
                             <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="login.html">Login</a></li>
                             <!--<li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="events.html">Events</a></li>-->
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="contact.html">IoT team</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="contact.html">About Us</a></li>
                         </ul>
                         <!-- End Menu List -->
                     </div>
@@ -106,7 +111,7 @@
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/images/w3.jpg');"></div>
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/images/w4.jpg');"></div>
                 <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('img/images/w5.jpg');"></div>
-                </div>            
+                </div>     
             </div>
             <!-- End Swiper Wrapper -->
             <!-- Arrows -->
@@ -119,6 +124,33 @@
             </a>
         </div>
         <!--========== END SWIPER SLIDER ==========-->
+
+
+        <div class="container" style="margin-top: 5rem;">
+            <div class="row justify-content-md-center">
+                <div class="card w-50">
+                    <div class="card-body">
+                        <h2 class="card-title text-center g-font-size-32--xs g-font-size-36--md">Login</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="user_email" placeholder="Email Address">
+                            <small class="form-text text-muted">Use tce mail ID</small>
+                            </div>
+                            <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="user_password" placeholder="Password"><br>
+                            <small class="form-text text-muted">
+                                <a href="#" class="float-right text-uppercase g-font-size-10--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Forgot Password</a>
+                            </small>
+                            </div>
+                            <button type="submit" id="btn-login" class="btn btn-lg btn-block btn-light float-right" onclick="login()">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
         <!--========== PAGE CONTENT ==========-->
         <!-- Features -->
@@ -512,6 +544,32 @@
         <script type="text/javascript" src="js/components/wow.min.js"></script>
         <!--========== END JAVASCRIPTS ==========-->
 
+        <script src="index.js"></script>
+
     </body>
     <!-- End Body -->
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyAMBlgm_BBWWVEIRmMc1ddSbfza9SdgILI",
+                authDomain: "iotclub-3b2cd.firebaseapp.com",
+                databaseURL: "https://iotclub-3b2cd.firebaseio.com",
+                projectId: "iotclub-3b2cd",
+                storageBucket: "iotclub-3b2cd.appspot.com",
+                messagingSenderId: "1031333943987",
+                appId: "1:1031333943987:web:43f55129846f1a754deec6",
+                measurementId: "G-82LG5CXE52"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            document.getElementById("login-form").addEventListener("click", function(event){
+                event.preventDefault();
+            });
+        </script>
+        
+        
+
 </html>
