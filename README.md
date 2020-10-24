@@ -1,2 +1,3 @@
-# iotclub2020.github.io
-The official IoT Webpage
+# The official page of IoT Club
+Department of Information Technology
+Thiagarajar College of Engineering, Madurai 625 015
