@@ -21,7 +21,9 @@ blog.once('value').then(function (snapshot){
         var name = item.val().name;
         var body = item.val().body;
         var likes = item.val().likes;
-    
+        var com = item.val().comments;
+        console.log(com);
+        
         var context = '<div class="g-bg-color--sky-light">'+
         '<div class="container g-padding-y-10--xs g-padding-y-125--xsm">'+
             '<div class="row d-flex justify-content-center">'+
@@ -36,6 +38,19 @@ blog.once('value').then(function (snapshot){
                                 '</p></p>'+
                                 '<a class="btn btn-success" href="https://iotclub2020.github.io/blogging.html?id='+ item.key.toString() +'"><i class="large material-icons">thumb_up</i></a>'+
                             '</div></div></div></div></div>';
+
+                        //     '<div style="text-align: left; margin-left: 30px; margin-top: 20px;">'+
+                        //     '<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">'+
+                        //         comments +
+                        //     '</a>'+
+                        //     '<div style="margin-bottom: 60px;" class="collapse" id="collapseExample">'+
+                        //         '<div class="card card-body"  style="margin-bottom: 30px;">'+
+                        //             '<h5 class="card-title">' + sender + '</h5>' +
+                        //             '<p class="card-text">' + sender_text + '</p>' +
+                        //         '</div>'+
+                        //     '</div>'+
+                        // '</div>'+
+                        
         blogBody.innerHTML += context;
     });
 });
