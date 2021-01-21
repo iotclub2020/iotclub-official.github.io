@@ -45,7 +45,7 @@ function saveDetails(){
         if (error) {
           window.location = 'details.html';
         } else {
-          window.location = 'dashboard.html';
+          window.location = 'index.html';
         }
       });
       
