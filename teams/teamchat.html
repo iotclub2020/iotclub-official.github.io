@@ -117,7 +117,8 @@
     <div class="g-bg-color--sky-light">
         <div class="container g-padding-y-80--xs g-padding-y-125--xsm">
             <p class="display-4 text-center" style="margin-top: -80px">Team Chat <span style="font-size: medium;" class="h-25 badge badge-secondary">Beta</span></p>
-            <div class="card bg-light mb-3 card-body" style="height: 500px; overflow: auto;">
+            <div id="controlholder"><button id="disable" class="btn btn-danger pull-right" onclick="disableChat()">Stop Chat</button></div><br><br><br>
+            <div class="card bg-light mb-3 card-body" style="height: 500px; overflow: auto;" id="messageCard">
                 <ul class="list-group list-group-flush" id="messageList">
                   <li style="margin-bottom: 20px;" class="list-group-item">
                     <div class="card bg-light mb-3">
@@ -129,10 +130,10 @@
                 </li>
                 </ul>
             </div>
-            <div class="form-group row bg-secondary" style="padding: 20px">
+            <div class="form-group row bg-secondary" id="postMessage" style="padding: 20px">
                 <label for="message" class="col-sm-2 col-form-label text-white">Team Name</label>
                 <div class="col-sm-7">
-                  <textarea id="messageArea" class="form-control" id="message" rows="2" placeholder="Type here"></textarea>
+                  <input type="text" id="messageArea" onkeypress="keyEvent(event)" class="form-control" id="message" placeholder="Type here"></textarea>
                 </div>
                 <div class="col-sm-3" style="margin-top: 15px;">
                     <button class="btn btn-success" onclick="getMessage()">
