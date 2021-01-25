@@ -95,28 +95,28 @@
     <div class="g-bg-color--sky-light">
         <div class="container g-padding-y-80--xs g-padding-y-125--xsm">
             <h3>Account Creation</h3>
-            <form class="col-md-6" onsubmit="event.preventDefault();">
+            <form class="col-md-6">
                 <div class="form-group">
                     <label for="name">Email</label>
-                    <input type="email" class="form-control" id="email"  placeholder="Enter Name">
+                    <input type="email" class="form-control" id="email"  placeholder="Enter Name" required>
                     <!-- <small class="form-text text-muted">Name as per college record</small> -->
                 </div>
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name"  placeholder="Enter Name">
+                  <input type="text" class="form-control" id="name"  placeholder="Enter Name" required>
                   <!-- <small class="form-text text-muted">Name as per college record</small> -->
                 </div>
                 <div class="form-group">
                   <label for="reg">Register Number</label>
-                  <input type="text" class="form-control" id="reg" placeholder="Register Number">
+                  <input type="text" class="form-control" id="reg" placeholder="Register Number" required>
                   <small class="form-text text-muted">Example: 18IT001</small>
                 </div>
                 <div class="form-group">
                     <label for="reg">New Password</label>
-                    <input type="password" class="form-control" id="pass" placeholder="Password">
+                    <input type="password" class="form-control" id="pass" placeholder="Password" required>
                   </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="ack">
+                  <input type="checkbox" class="form-check-input" id="ack" required>
                   <label class="form-check-label" for="ack">I am an IoT Club Member</label>
                 </div>
                 <button class="btn btn-primary" onclick="saveDetails()">Submit</button> <br><br>
