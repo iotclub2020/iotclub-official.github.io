@@ -1,9 +1,7 @@
 var db = firebase.database().ref('/teams');
-window.localStorage.setItem("name","Team Sankar");
-window.localStorage.setItem("uid","8547");
 
 const teamName = window.localStorage.getItem("name");
-const uid = window.localStorage.getItem("uid");
+const uid = window.localStorage.getItem("admin");
 
 const post = document.getElementById('postMessage');
 var ctrlholder = document.getElementById('controlholder');
@@ -11,17 +9,43 @@ var ctrlholder = document.getElementById('controlholder');
 var textarea = document.getElementById('messageArea');
 var parent = document.getElementById('messageList');
 
+const roomCode = window.localStorage.getItem('roomCode');
+console.log(roomCode);
+var adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
+
+document.getElementById('uname').innerText = 'Welcome ' + uid + ' !';
+
 function disableChat(){
     if(uid != null){
         post.style.visibility = "hidden";
-        ctrlholder.innerHTML = '<button class="btn btn-success pull-right" onclick="enableChat()">Enable Chat</button>';
+        adminRef.update({
+            allowReply: false
+        },function(error){
+            if(error){
+                
+            }
+            else{
+                ctrlholder.innerHTML = '<button class="btn btn-success pull-right" onclick="enableChat()">Enable Chat</button>';
+            }
+        });
+        
     }
 }
 
 function enableChat(){
     if(uid != null){
         post.style.visibility = "visible";
-        ctrlholder.innerHTML = '<button class="btn btn-danger pull-right" onclick="disableChat()">Stop Chat</button>';
+        adminRef.update({
+            allowReply: true
+        },function(error){
+            if(error){
+                
+            }
+            else{
+                ctrlholder.innerHTML = '<button class="btn btn-danger pull-right" onclick="disableChat()">Stop Chat</button>';
+            }
+        });
+        
     }
 }
 
@@ -68,3 +92,4 @@ function keyEvent(event){
         getMessage();
     
 }
+
