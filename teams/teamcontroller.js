@@ -22,10 +22,18 @@ else{
     var roomsRef = firebase.database().ref('/rooms/'+roomCode);
 }
 
-if (uid!=null)
+console.log(roomCode);
+if (uid!=null){
     adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
-
-document.getElementById('uname').innerText = 'Welcome ' + uid + ' !';
+}
+else{
+    document.getElementById('disable').style.visibility = "hidden";
+}
+if(uid == null){
+    document.getElementById('uname').innerText = 'Welcome Team ' + teamName.toUpperCase() + ' !';
+}else{
+    document.getElementById('uname').innerText = 'Welcome Team' + uid + ' !';
+}
 
 
 function disableChat(){
