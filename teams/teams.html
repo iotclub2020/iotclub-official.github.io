@@ -114,7 +114,7 @@
     
     <div class="g-bg-color--sky-light">
         <div class="container g-padding-y-80--xs g-padding-y-125--xsm">
-            <p class="display-4 text-center" style="margin-top: -80px">Team Chat <span style="font-size: medium;" class="h-25 badge badge-secondary">Beta</span></p>
+            <p class="display-4 text-center" style="margin-top: -80px">Team Chat <span style="font-size: medium;" class="h-25 badge badge-secondary">Alpha</span></p>
             <div class="row d-flex justify-content-center">
                 <!-- <p id="main-holder"></p> -->
                 <div class="col-md-6 d-flex justify-content-center">
@@ -123,12 +123,15 @@
                         <div class="card" id="joinCard">
                             <div class="card-body text-center">
                               <h5 class="card-title h3">Join Chat Room</h5>
-                              <div class="form-row align-items-center" style="padding: 30px;">
+                              <div class="form align-items-center" style="padding: 30px;">
                                 <div class="col-auto">
                                   <input type="text" class="form-control mb-2" id="roomid" placeholder="Room Code">
                                 </div>
                                 <div class="col-auto">
-                                  <button class="btn btn-success" id="joinbtn" onclick="joinRoom()"><i class="large material-icons">arrow_forward</i></button>
+                                  <input type="text" class="form-control mb-2" id="teamname" placeholder="Team Name">
+                                </div>
+                                <div class="col-auto">
+                                  <button class="btn btn-success" id="joinbtn" onclick="joinRoom()">Join Room<i class="large material-icons">arrow_forward</i></button>
                                 </div>
                               </div>
                               <p class="card-text"><small class="text-muted">Ask your Room organizer for code</small></p>

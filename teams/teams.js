@@ -85,8 +85,11 @@ function createRoom(){
 
 function joinRoom(){
     var roomid = document.getElementById('roomid').value;
+    var teamname = document.getElementById('teamname').value;
     firebase.database().ref('/rooms').once('value').then(function (snap){
         if (snap.hasChild(roomid)){
+            window.localStorage.setItem("roomCode",String(roomid));
+            window.localStorage.setItem("teamname",String(teamname));
             window.location = "teamchat.html";
         }
         else{

@@ -1,6 +1,8 @@
-var db = firebase.database().ref('/teams');
+var teams = firebase.database().ref('/teams');
 
-const teamName = window.localStorage.getItem("name");
+const teamName = window.localStorage.getItem("teamname");
+document.getElementById('teamname').value = teamName;
+// const teamName = "Scriptons";
 const uid = window.localStorage.getItem("admin");
 
 const post = document.getElementById('postMessage');
@@ -9,11 +11,22 @@ var ctrlholder = document.getElementById('controlholder');
 var textarea = document.getElementById('messageArea');
 var parent = document.getElementById('messageList');
 
-const roomCode = window.localStorage.getItem('roomCode');
-console.log(roomCode);
-var adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
+const roomCode = window.localStorage.getItem("roomCode");
+var roomsRef = null;
+var adminRef = null;
+
+if (roomCode == null && teamName == null){
+    window.location = "teams.html"
+}
+else{
+    var roomsRef = firebase.database().ref('/rooms/'+roomCode);
+}
+
+if (uid!=null)
+    adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
 
 document.getElementById('uname').innerText = 'Welcome ' + uid + ' !';
+
 
 function disableChat(){
     if(uid != null){
@@ -49,10 +62,41 @@ function enableChat(){
     }
 }
 
+if(roomsRef != null){
+    roomsRef.child('messages').on('child_added', function (snap,prev){
+        var pulledData = snap.val();
+        if (pulledData.name != teamName)
+            displayMessage(pulledData.name,pulledData.message);
+    });
+}
+
 function getMessage(){
     if (textarea.value != "")
         addMessage(textarea.value);
     textarea.value="";
+}
+
+function displayMessage(name,message){
+    var list = '<li style="margin-bottom: 20px;" class="list-group-item">'+
+    '<div class="card bg-light mb-3">'+
+    '<div class="card-header h5"><b>'+
+    name +
+    '</b>';
+
+    if (uid != null){
+        list += '<button class="pull-right btn btn-danger"><div class="row">'+
+        '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
+        '<div class="col">Points</div>'+
+        '</div></button>';
+    }
+
+    list += '</div><div class="card-body">'+
+      '<p class="lead">'+
+      message +
+      '</p></div></div></li>';
+      
+    parent.innerHTML += list;
+    scrollDown();
 }
 
 function addMessage(replyText){
@@ -75,9 +119,18 @@ function addMessage(replyText){
       replyText +
       '</p></div></div></li>';
 
-    parent.innerHTML += list;
-    scrollDown();
-
+    roomsRef.child('messages').push().set({
+        name:teamName,
+        message: replyText
+    },function (error){
+        if (error){
+            alert('Message not sent');
+        }
+        else{
+            parent.innerHTML += list;
+            scrollDown();
+        }
+    });
     
 }
 
