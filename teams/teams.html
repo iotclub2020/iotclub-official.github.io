@@ -14,7 +14,6 @@
 
     <!-- Web Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
-
     <!-- Vendor Styles -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../css/animate.css" rel="stylesheet" type="text/css" />
@@ -22,14 +21,13 @@
     <link href="../vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css" />
     <link href="../vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
     <link href="../vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Theme Styles -->
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
-    <link href="../css/global/global.css" rel="stylesheet" type="text/css" />
+    <link href="../css/global/global.css" rel="stylesheet" type="text/css" />            
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
@@ -43,82 +41,22 @@
 
 <body>
 
-    <!--========== HEADER ==========-->
-    <header class="navbar-fixed-top s-header js__header-sticky js__header-overlay">
-        <!-- Navbar -->
-        <div class="s-header__navbar">
-            <div class="s-header__container">
-                <div class="s-header__navbar-row">
-                    <div class="s-header__navbar-row-col">
-                        <!-- Logo -->
-                        <div class="s-header__logo">
-                            <a href="../index.html" class="s-header__logo-link">
-                                <h3 style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; color: white;">IoT Club</h3>
-                            </a>
-                        </div>
-                        <!-- End Logo -->
-                    </div>
-                    <div class="s-header__navbar-row-col">
-                        <!-- Trigger -->
-                        <a href="javascript:void(0);" class="s-header__trigger js__trigger">
-                            <span class="s-header__trigger-icon"></span>
-                            <svg x="0rem" y="0rem" width="3.125rem" height="3.125rem" viewbox="0 0 54 54">
-                                <circle fill="transparent" stroke="#fff" stroke-width="1" cx="27" cy="27" r="25"
-                                    stroke-dasharray="157 157" stroke-dashoffset="157"></circle>
-                            </svg>
-                        </a>
-                        <!-- End Trigger -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Navbar -->
-
-        <!-- Overlay -->
-        <div class="s-header-bg-overlay js__bg-overlay">
-            <!-- Nav -->
-            <nav class="s-header__nav js__scrollbar">
-                <div class="container-fluid">
-                    <!-- Menu List -->
-                    <ul class="list-unstyled s-header__nav-menu">
-                        <ul class="list-unstyled s-header__nav-menu">
-                            <li class="s-header__nav-menu-item"><a
-                                    class="s-header__nav-menu-link s-header__nav-menu-link-divider"
-                                    href="leaderboard.html">Leaderboard</a></li>
-                                    <li class="s-header__nav-menu-item"><a
-                                        class="s-header__nav-menu-link s-header__nav-menu-link-divider"
-                                        href="contact.html">Profile</a></li>
-                            <li class="s-header__nav-menu-item"><a onclick="logout()"
-                                    class="s-header__nav-menu-link s-header__nav-menu-link-divider"
-                                    href="#">Logout</a></li>
-                        </ul>
-                        <!-- End Menu List -->
-                </div>
-            </nav>
-            <!-- End Nav -->
-
-            <!-- Action -->
-        </div>
-        <!-- End Overlay -->
-    </header>
-    <!--========== END HEADER ==========-->
-
-    <!--========== PROMO BLOCK ==========-->
     <div class="g-bg-position--center js__parallax-window"
         style="background: url(../img/dbg.jpg) 50% 0 no-repeat fixed; padding-top: 50px;">
         <div class="g-container--md g-text-center--xs g-padding-y-50--xs">
-            <h1 id="uname" class="g-font-size-40--xs g-font-size-40--sm g-font-size-40--md g-color--white g-letter-spacing--1">Welcome  !
+            <h1 id="uname" class="g-font-size-40--xs g-font-size-40--sm g-font-size-40--md g-color--white g-letter-spacing--1">Welcome to IoT Teams!
             </h1>
         </div>
     </div>
     
     <div class="g-bg-color--sky-light">
         <div class="container g-padding-y-80--xs g-padding-y-125--xsm">
-            <p class="display-4 text-center" style="margin-top: -80px">Team Chat <span style="font-size: medium;" class="h-25 badge badge-secondary">Alpha</span></p>
+            <p class="display-4 text-center" style="margin-top: -80px">Team Chat <span style="font-size: medium;" class="h-25 badge rounded-pill badge-secondary">Alpha</span></p>
             <div class="row d-flex justify-content-center">
                 <!-- <p id="main-holder"></p> -->
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="wow fadeInUp" data-wow-duration=".3" data-wow-delay=".1s">
+                      <!-- Button trigger modal -->
 
                         <div class="card" id="joinCard">
                             <div class="card-body text-center">
@@ -136,7 +74,7 @@
                               </div>
                               <p class="card-text"><small class="text-muted">Ask your Room organizer for code</small></p>
                             </div>
-                            <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Create Room</button>
+                            <button class="btn btn-secondary" onclick="create()">Create Room</button>
                         </div>
 
                         <div class="card" id="createCard" style="display: none;">
@@ -152,8 +90,8 @@
                             </button>
                         </div>
                         
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h5 class="modal-title" id="exampleModalLabel">Login</h5>
@@ -177,14 +115,14 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div> -->
 
 
                           <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Room Creation</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel1">Room Creation</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -243,6 +181,7 @@
     <script src="teams.js"></script>
     <!-- Back To Top -->
     <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+
     <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
     <!-- <script src="events.js" defer></script>
     <script src="index.js" defer></script> -->
@@ -268,10 +207,10 @@
     <script type="text/javascript" src="../js/components/counter.min.js"></script>
     <script type="text/javascript" src="../js/components/swiper.min.js"></script>
     <script type="text/javascript" src="../js/components/wow.min.js"></script>
-    <!--========== END JAVASCRIPTS ==========-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
-<!-- End Body -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--========== END JAVASCRIPTS ==========-->
+    <!-- End Body -->
+  </body>
 </html>

@@ -3,6 +3,7 @@ const admin = window.localStorage.getItem("admin");
 if (admin!=null) {
     document.getElementById('createCard').style.display = "block";
     document.getElementById('joinCard').style.display = "none";
+    document.getElementById('uname').innerText = "Welcome "+admin+" !";
 }
 
 
@@ -45,6 +46,10 @@ function signUp(){
     });
 }
 
+function create(){
+    window.location = "login.html";
+}
+
 function createRoom(){
     const roomName = document.getElementById('roomName').value;
     const roomCode = document.getElementById('roomCode').value;
@@ -62,7 +67,6 @@ function createRoom(){
                     window.alert('Room creation failed!  Retry after sometime');
                 }
                 else{
-
                     firebase.database().ref().child('rooms').child(roomCode).set({
                         name: roomName
                     },function(error){
@@ -72,6 +76,8 @@ function createRoom(){
                         else{
                             window.alert('Room Created!');
                             window.localStorage.setItem("roomCode",roomCode);
+                            window.localStorage.setItem("roomname",roomName);
+                            window.location ="teamchat.html";
                         }
                     });
 
@@ -85,12 +91,28 @@ function createRoom(){
 
 function joinRoom(){
     var roomid = document.getElementById('roomid').value;
-    var teamname = document.getElementById('teamname').value;
+    var teamname = document.getElementById('teamname').value.toLowerCase();
     firebase.database().ref('/rooms').once('value').then(function (snap){
         if (snap.hasChild(roomid)){
             window.localStorage.setItem("roomCode",String(roomid));
             window.localStorage.setItem("teamname",String(teamname));
-            window.location = "teamchat.html";
+            firebase.database().ref('/teams').once('value').then(function (snapshot){
+                if (snapshot.hasChild(teamname)){
+                    window.location = "teamchat.html";
+                }
+                else{
+                    firebase.database().ref('/teams').child(teamname).set({
+                        points: 0
+                    },function (error){
+                        if(error){
+                            alert('Try joining room again');
+                        }
+                        else{
+                            window.location = "teamchat.html";
+                        }
+                    });
+                }
+            });
         }
         else{
             alert("Room Doesn't Exist");

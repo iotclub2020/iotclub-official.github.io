@@ -1,16 +1,24 @@
-const teamName = window.localStorage.getItem("teamname"); // Getting team name from cookies
-document.getElementById('teamname').value = teamName;
-document.getElementById('nameholder').value = teamName;
-
-// Updating team points 
-var teams = firebase.database().ref('/teams').child(teamName.toLowerCase()).on('value',function (snap){
-    document.getElementById('pointsholder').innerText = snap.val().points;
-});
-
-// window.localStorage.setItem("admin","sankar");
 const uid = window.localStorage.getItem("admin");
 
-const post = document.getElementById('postMessage');
+var teamName = window.localStorage.getItem("teamname"); // Getting team name from cookies
+var roomName = window.localStorage.getItem("roomname"); // Getting team name from cookies
+if(teamName !=null){
+    document.getElementById('teamname').innerText = "Team "+teamName.toUpperCase();
+    document.getElementById('nameholder').innerText = teamName.toUpperCase();
+}
+else{
+    teamName = uid;
+}
+
+// Updating team points 
+if(uid == null){
+    document.getElementById('roomdetails').style.display = "none";
+    var teams = firebase.database().ref('/teams').child(teamName.toLowerCase()).on('value',function (snap){
+        document.getElementById('pointsholder').innerText = snap.val().points;
+    });
+}
+
+var post = document.getElementById('postMessage');
 var ctrlholder = document.getElementById('controlholder');
 
 var textarea = document.getElementById('messageArea');
@@ -21,17 +29,32 @@ var roomsRef = null;
 var adminRef = null;
 
 // checking the validity of room code 
-
-if (roomCode == null || teamName == null){
-    window.location = "teams.html"
+if (uid==null){
+    
+    if (roomCode == null || teamName == null){
+        window.location = "teams.html"
+    }
+    else{
+        var roomsRef = firebase.database().ref('/rooms/'+roomCode);
+    }
 }
-else{
+
+if (uid!=null){
     var roomsRef = firebase.database().ref('/rooms/'+roomCode);
+    document.getElementById('roomCode').innerText = roomCode;
+    document.getElementById('roomName').innerText = roomName;
+    document.getElementById('teaminfo').style.display = "none";
 }
 
 // In the case of room admin 
 if (uid!=null){
     adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
+    adminRef.on('value',function (snap){
+        var reply = snap.val().allowReply;
+        // if(!reply){
+        //     post.style.display = "none";
+        // }
+    });
 }
 else{
     document.getElementById('disable').style.visibility = "hidden";
@@ -39,14 +62,14 @@ else{
 if(uid == null){
     document.getElementById('uname').innerText = 'Welcome Team ' + teamName.toUpperCase() + ' !';
 }else{
-    document.getElementById('uname').innerText = 'Welcome Team' + uid + ' !';
+    document.getElementById('uname').innerText = 'Welcome ' + uid.toUpperCase() + ' !';
 }
 
 
 // Only visible for admin
 function disableChat(){
     if(uid != null){
-        post.style.visibility = "hidden";
+        // post.style.visibility = "hidden";
         adminRef.update({
             allowReply: false
         },function(error){
@@ -63,7 +86,7 @@ function disableChat(){
 
 function enableChat(){
     if(uid != null){
-        post.style.visibility = "visible";
+        // post.style.visibility = "visible";
         adminRef.update({
             allowReply: true
         },function(error){
@@ -82,7 +105,6 @@ function enableChat(){
 if(roomsRef != null){
     roomsRef.child('messages').on('child_added', function (snap,prev){
         var pulledData = snap.val();
-        // console.log(snap.val());
         if (pulledData.name != teamName)
             displayMessage(pulledData.name,pulledData.message);
     });
@@ -127,12 +149,13 @@ function addMessage(replyText){
     '<div class="card-header h5"><b>'+
     teamName +
     '</b>';
+    
 
     if (uid != null){
-        // list += '<button class="pull-right btn btn-danger" onclick="addPoints(this)"><div class="row">'+
-        // '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
-        // '<div class="col">Points</div>'+
-        // '</div></button>';
+        list += '<button class="pull-right btn btn-danger" onclick="addPoints(this)"><div class="row">'+
+        '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
+        '<div class="col">Points</div>'+
+        '</div></button>';
     }
 
     list += '</div><div class="card-body">'+
@@ -140,18 +163,34 @@ function addMessage(replyText){
       replyText +
       '</p></div></div></li>';
 
-    roomsRef.child('messages').push().set({
-        name:teamName,
-        message: replyText
-    },function (error){
-        if (error){
-            alert('Message not sent');
-        }
-        else{
-            parent.innerHTML += list;
-            scrollDown();
-        }
-    });
+    if(uid != null){
+        roomsRef.child('messages').push().set({
+            name:uid,
+            message: replyText
+        },function (error){
+            if (error){
+                alert('Message not sent');
+            }
+            else{
+                parent.innerHTML += list;
+                scrollDown();
+            }
+        });
+    }
+    else{
+        roomsRef.child('messages').push().set({
+            name:teamName,
+            message: replyText
+        },function (error){
+            if (error){
+                alert('Message not sent');
+            }
+            else{
+                parent.innerHTML += list;
+                scrollDown();
+            }
+        });
+    }
     
 }
 
@@ -203,3 +242,4 @@ function addPoints(params) {
         }
     });
 }
+
