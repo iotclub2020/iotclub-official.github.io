@@ -1,8 +1,13 @@
-var teams = firebase.database().ref('/teams');
-
-const teamName = window.localStorage.getItem("teamname");
+const teamName = window.localStorage.getItem("teamname"); // Getting team name from cookies
 document.getElementById('teamname').value = teamName;
-// const teamName = "Scriptons";
+document.getElementById('nameholder').value = teamName;
+
+// Updating team points 
+var teams = firebase.database().ref('/teams').child(teamName.toLowerCase()).on('value',function (snap){
+    document.getElementById('pointsholder').innerText = snap.val().points;
+});
+
+// window.localStorage.setItem("admin","sankar");
 const uid = window.localStorage.getItem("admin");
 
 const post = document.getElementById('postMessage');
@@ -15,14 +20,16 @@ const roomCode = window.localStorage.getItem("roomCode");
 var roomsRef = null;
 var adminRef = null;
 
-if (roomCode == null && teamName == null){
+// checking the validity of room code 
+
+if (roomCode == null || teamName == null){
     window.location = "teams.html"
 }
 else{
     var roomsRef = firebase.database().ref('/rooms/'+roomCode);
 }
 
-console.log(roomCode);
+// In the case of room admin 
 if (uid!=null){
     adminRef = firebase.database().ref('teamsAdmin/'+uid+'/rooms/'+roomCode);
 }
@@ -36,6 +43,7 @@ if(uid == null){
 }
 
 
+// Only visible for admin
 function disableChat(){
     if(uid != null){
         post.style.visibility = "hidden";
@@ -70,20 +78,24 @@ function enableChat(){
     }
 }
 
+// message added event listener
 if(roomsRef != null){
     roomsRef.child('messages').on('child_added', function (snap,prev){
         var pulledData = snap.val();
+        // console.log(snap.val());
         if (pulledData.name != teamName)
             displayMessage(pulledData.name,pulledData.message);
     });
 }
 
+// gets message from user
 function getMessage(){
     if (textarea.value != "")
         addMessage(textarea.value);
     textarea.value="";
 }
 
+// display message to user from database
 function displayMessage(name,message){
     var list = '<li style="margin-bottom: 20px;" class="list-group-item">'+
     '<div class="card bg-light mb-3">'+
@@ -92,7 +104,7 @@ function displayMessage(name,message){
     '</b>';
 
     if (uid != null){
-        list += '<button class="pull-right btn btn-danger"><div class="row">'+
+        list += '<button class="pull-right btn btn-danger" onclick="addPoints(this)"><div class="row">'+
         '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
         '<div class="col">Points</div>'+
         '</div></button>';
@@ -107,23 +119,24 @@ function displayMessage(name,message){
     scrollDown();
 }
 
+// add message to database and web page
 function addMessage(replyText){
 
     var list = '<li style="margin-bottom: 20px;" class="list-group-item">'+
-    '<div class="card bg-light mb-3">'+
+    '<div class="card bg-success text-white mb-3">'+
     '<div class="card-header h5"><b>'+
     teamName +
     '</b>';
 
     if (uid != null){
-        list += '<button class="pull-right btn btn-danger"><div class="row">'+
-        '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
-        '<div class="col">Points</div>'+
-        '</div></button>';
+        // list += '<button class="pull-right btn btn-danger" onclick="addPoints(this)"><div class="row">'+
+        // '<div class="col" style="margin-right: -25px"><i class="material-icons">add</i></div>'+
+        // '<div class="col">Points</div>'+
+        // '</div></button>';
     }
 
     list += '</div><div class="card-body">'+
-      '<p class="lead">'+
+      '<p class="lead text-white">'+
       replyText +
       '</p></div></div></li>';
 
@@ -142,11 +155,13 @@ function addMessage(replyText){
     
 }
 
+// scroll down when new message added
 function scrollDown(){
     var elem = document.getElementById('messageCard');
     elem.scrollTop = elem.scrollHeight;
 }
 
+// Enter key to sent
 function keyEvent(event){
     var x = event.key;
     if (x == "Enter")
@@ -154,3 +169,37 @@ function keyEvent(event){
     
 }
 
+// Exit from room
+function exitRoom() {
+    localStorage.removeItem("teamname");
+    localStorage.removeItem("roomCode");
+    window.location = "teams.html";
+}
+
+function addPoints(params) {
+    var nodeValue = params.previousElementSibling.textContent;
+    var prevPoints;
+    firebase.database().ref('/teams').child(nodeValue.toLowerCase()).once('value')
+    .then(function (snap){
+        if (snap.val() == null){
+            alert('Team does not exist!');
+        }
+        else{
+            prevPoints = snap.val().points;
+            firebase.database().ref('/teams').child(nodeValue.toLowerCase()).update({
+                points:prevPoints+5
+            },function (error){
+                if (error){
+                    alert('Points not added');
+                }
+                else{
+                    params.innerHTML = '<div class="row">'+
+                    '<div class="col" style="margin-right: -25px"><i class="material-icons">done</i></div>'+
+                    '<div class="col">Added</div>'+
+                    '</div>';
+                    params.className = "pull-right btn btn-light";
+                }
+            });
+        }
+    });
+}
